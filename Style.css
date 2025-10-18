@@ -7,8 +7,8 @@
 }
 
 body {
-    /* background-color: black;
-    color: white; */
+    background-color: black;
+    color: white;
 }
 
 .left {
@@ -18,9 +18,8 @@ body {
 
 .right {
     width: 75vw;
+    margin: 16px 0;
 }
-
-.home {}
 
 .home ul li {
     display: flex;
@@ -38,9 +37,79 @@ body {
     padding-top: 14px;
     padding: 23px 14px;
     align-items: center;
+    font-size: 13px;
 
 }
 
 .heading img {
     width: 25px;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    font-size: 10px;
+    gap: 13px;
+    padding: 10px;
+}
+
+.footer a{
+    color: grey;
+}
+
+.library{
+    position: relative;
+    min-height: 80vh;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(34, 34, 34);
+}
+
+.header > *{
+    padding: 20px;
+}
+
+.playlist{
+    padding: 16px;
+}
+.card_container{
+    margin: 30px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.card{
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #252525;
+    position: relative;
+}
+
+.card > *{
+    padding-top: 10px;
+}
+
+.card img{
+    width: 100%;
+    object-fit: contain;
+}
+.play {
+    width: 28px;
+    height: 28px;
+    background-color: #1fdf64;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 168px;
+    right: 17px;
+    opacity: 0;
+    transition: all 1s ease-out;
+
 }
