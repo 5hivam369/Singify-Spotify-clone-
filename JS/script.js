@@ -35,14 +35,14 @@ async function getsongs(folder) {
     songul.innerHTML=""
     for (const song of songs) {
         songul.innerHTML = songul.innerHTML + `<li>
-                                <img class="invert" src="music.svg" >
+                                <img class="invert" src="Images/music.svg" >
                                 <div class="info">
                                     <div>${song.replaceAll("%20", " ")}</div>
                                     <div>Artist Name</div>
                                 </div>
                                 <div class="playnow">
                                     <span>Play Now</span>
-                                    <img class="invert" src="play.svg">
+                                    <img class="invert" src="Images/play.svg">
                                 </div>
 
           </li>`
@@ -53,6 +53,7 @@ async function getsongs(folder) {
             playMusic(e.querySelector(".info").firstElementChild.innerHTML)
         })
     })
+    return songs
 }
 
 const playMusic = (track, pause = false) => {
@@ -60,7 +61,7 @@ const playMusic = (track, pause = false) => {
     currentsong.src = `http://127.0.0.1:5500/${currfolder}/` + track
     if (!pause) {
         currentsong.play()
-        play.src = "pause.svg"
+        play.src = "Images/pause.svg"
     }
     document.querySelector(".songinfo").innerHTML = decodeURI(track)
     document.querySelector(".songtime").innerHTML = "00:00/00:00"
@@ -82,7 +83,7 @@ async function displayAlbumbs(){
             let a = await fetch(`http://127.0.0.1:5500/songs/${folder}/info.json`)
             let response = await a.json()
             console.log(response)
-            card_container.innerHTML=card_container.innerHTML + `<div data-folder="Weeknd" class="card">
+            card_container.innerHTML=card_container.innerHTML + `<div data-folder="${folder}" class="card">
                         <div  class="playbtn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +101,7 @@ async function displayAlbumbs(){
     Array.from(document.getElementsByClassName("card")).forEach(e=>{
         e.addEventListener("click", async item=>{ 
             songs = await getsongs(`songs/${item.currentTarget.dataset.folder}`)
-            
+            playMusic(songs[0])
         })
     })
 }
@@ -118,11 +119,11 @@ async function main() {
     play.addEventListener("click", () => {
         if (currentsong.paused) {
             currentsong.play()
-            play.src = "pause.svg"
+            play.src = "Images/pause.svg"
         }
         else {
             currentsong.pause()
-            play.src = "play.svg"
+            play.src = "Images/play.svg"
         }
     })
     //timeupdate
@@ -162,7 +163,19 @@ async function main() {
     document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
         currentsong.volume = parseInt(e.target.value) / 100
     })
-    
+    //mute
+    document.querySelector(".volume>img").addEventListener("click",e=>{
+        if(e.target.src.includes("Images/volume.svg")){
+            e.target.src = e.target.src.replace("Images/volume.svg","Images/mute.svg")
+            currentsong.volume=0
+            document.querySelector(".range").getElementsByTagName("input")[0].value=0
+        }
+        else{
+            e.target.src = e.target.src.replace("Images/mute.svg","Images/volume.svg")
+            currentsong.volume=0.5
+            document.querySelector(".range").getElementsByTagName("input")[0].value=50
+        }
+    })
 }
 main()
 

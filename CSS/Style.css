@@ -194,6 +194,7 @@ body {
 .hamburger {
     display: none;
     width: 40px;
+    cursor: pointer;
 }
 
 .hamburgericon {
@@ -295,12 +296,16 @@ body {
     justify-content: center;
     align-items: center;
     gap: 12px;
+    cursor: pointer;
+}
+.range input{
+    cursor: pointer;
 }
 
 .infobar {
     display: flex;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 5px 0;
 }
 
 @media (max-width: 1200px) {
@@ -359,9 +364,15 @@ body {
         gap: 10px;
         align-items: center;
     }
+    .card_container{
+        max-height: 40vh;
+    }
 }
-@media (max-width: 450px) {
+@media (max-width: 750px) {
     .card{
-        width: 80vw;
+        width: auto;
+    }
+    .card_container{
+        max-height: 45vh;
     }
 }
